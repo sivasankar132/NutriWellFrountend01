@@ -17,10 +17,10 @@ export class ApiError extends Error {
 const TOKEN_KEY = 'nutriwell_auth_token';
 const USER_KEY = 'nutriwell_auth_user';
 
-export const API_BASE_URL: string = 
-  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL)
-    ? import.meta.env.VITE_API_BASE_URL
-    : 'http://127.0.0.1:8000';
+const envApiUrl = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_API_BASE_URL : undefined;
+const isProd = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.PROD : false;
+
+export const API_BASE_URL: string = envApiUrl || (isProd ? 'https://nutri-well0101.vercel.app' : 'http://127.0.0.1:8000');
 
 class ApiClient {
   private baseUrl: string;
